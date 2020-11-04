@@ -59,6 +59,17 @@ void printTreeInOrder(struct node* root)
     }
 }
 
+void freeTheTree(struct node* root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    freeTheTree(root->left);
+    freeTheTree(root->right);
+    free(root);
+}
+
 int main()
 {
     int numberOftens, numberOfGames; //This is, respectively, the 'M' and 'N' that the specification order. These names were chosen just to make reading easier
@@ -82,7 +93,8 @@ int main()
         printf("[ ");
         printTreeInOrder(root);
         printf("]\n");
-        //Reset the tree and the game
+        //Reset and free the tree and the game
+        freeTheTree(root);
         tenI = 0;
         root = NULL;
     }  
